@@ -14,7 +14,7 @@ const filename = ext => {
 module.exports = {
 	context: path.resolve(__dirname, 'src'),
 	mode: 'development',
-	entry: ['@babel/polyfill','./index.js']
+	entry: ['@babel/polyfill','./index.js'],
 	output: {
 		filename: filename('js'),
 		path: path.resolve(__dirname, 'dist')
@@ -30,7 +30,7 @@ module.exports = {
 	devServer: {
 		port: 3000,
 		hot: isDev
-	}
+	},
 	module: {
 		rules: [
 			{
@@ -71,5 +71,5 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: filename('css')
 		})
-	],
+	]
 }
