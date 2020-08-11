@@ -1,3 +1,5 @@
+import {getStyleName} from './utils';
+
 class Dom {
     constructor(selector) {
         this.$el = typeof selector === 'string' ? 
@@ -31,6 +33,27 @@ class Dom {
             this.$el.appendChild(node);
         }
         return this;
+    }
+    get data() {
+        return this.$el.dataset;
+    }
+    get width() {
+        return this.$el.offsetWidth;
+    }
+    closest(selector) {
+        return $( this.$el.closest(selector) );
+    }
+    getCoords() {
+        return this.$el.getBoundingClientRect();
+    }
+    findAll(selector) {
+        return this.$el.querySelectorAll(selector);
+    }
+    css(styles = {}) {
+        Object.keys(styles).forEach(styleItem => {
+            const styleName = getStyleName(styleItem);
+            this.$el.style[styleName] = styles[styleItem];
+        }) ;
     }
 }
 
