@@ -51,7 +51,6 @@ export default function resizeHandler($root, e) {
             opacity: '0',
             bottom: '0',
             right: '0',
-            width: 'initial'
         });
     }
 }
