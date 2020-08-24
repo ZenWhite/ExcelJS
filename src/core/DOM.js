@@ -1,5 +1,3 @@
-import {getStyleName} from './utils';
-
 class Dom {
     constructor(selector) {
         this.$el = typeof selector === 'string' ? 
@@ -13,11 +11,11 @@ class Dom {
         return this.$el.outerHTML.trim();
     }
     text(txt) {
-        if(typeof txt === 'string') {
+        if(typeof txt !== 'undefined') {
             this.$el.textContent = txt;
             return this;
         }
-        if(this.$el.tagName.toLowerCase === 'input') {
+        if(this.$el.tagName.toLowerCase() === 'input') {
             return this.$el.value.trim();
         }
         return this.$el.textContent.trim();
@@ -74,9 +72,14 @@ class Dom {
     }
     css(styles = {}) {
         Object.keys(styles).forEach(styleItem => {
-            const styleName = getStyleName(styleItem);
-            this.$el.style[styleName] = styles[styleItem];
+            this.$el.style[styleItem] = styles[styleItem];
         }) ;
+    }
+    getStyles(styles = []) {
+        return styles.reduce((res, s) => {
+            res[s] = this.$el.style[s];
+            return res;
+        }, {});
     }
     focus() {
         this.$el.focus();
@@ -87,6 +90,13 @@ class Dom {
     }
     removeClass(className) {
         this.$el.classList.remove(className);
+    }
+    attr(name, value) {
+        if(value) {
+            this.$el.setAttribute(name, value);
+            return this;
+        }
+        return this.$el.getAttribute(name);
     }
 }
 
