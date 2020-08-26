@@ -1,6 +1,6 @@
 import { TABLE_RESIZE, CHANGE_TEXT, 
         APPLY_STYLE, CHANGE_STYLES,
-        CHANGE_TITLE } from "./types";
+        CHANGE_TITLE, UPDATE_DATE } from "./types";
 
 export default function rootReduces(state, action) {
 
@@ -35,6 +35,8 @@ export default function rootReduces(state, action) {
             }
         case CHANGE_TITLE:
             return {...state, title: action.data}
+        case UPDATE_DATE:
+            return {...state, date: new Date().toJSON()}
         default: return state
     } 
 

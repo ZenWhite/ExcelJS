@@ -8,10 +8,11 @@ const defaultState = {
   dataState: {},
   stylesState: {},
   currentText: '',
-  currentStyles: defaultStyles
+  currentStyles: defaultStyles,
+  date: new Date().toJSON()
 }
 
-const normalize = s => {
+const normalize = state => {
   return {
     ...state,
     currentStyles: defaultStyles,
@@ -19,6 +20,6 @@ const normalize = s => {
   }
 }
 
-export const initialState = storage('excel-state') ?
-        storage('excel-state') :
-        defaultState;
+export function normalizeInitialState(state) {
+  return state ? normalize(state) : defaultState;
+}
